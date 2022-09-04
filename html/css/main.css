@@ -613,8 +613,8 @@ body {
 }
 
 .itemboxes-container {
-    height: 140px;
-    min-width: 129px;
+    height: 150px;
+    min-width: 130px;
     max-width: 80vh;
     width: fit-content;
     position: absolute;

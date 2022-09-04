@@ -827,7 +827,14 @@ RegisterNetEvent('inventory:server:SaveInventory', function(type, id)
 			Gloveboxes[id].isOpen = false
 		end
 	elseif type == "stash" then
-		SaveStashItems(id, Stashes[id].items)
+		local indexstart, indexend = string.find(id, "FishingBox_") -- Default: "FishingBox_" or your Config.Stash.Name
+		if indexstart and indexend then
+			TriggerEvent("m-Fishing:server:saveFishingBox", source, id, Stashes[id].items, function(close)
+				Stashes[id].isOpen = close
+			end)
+		else
+			SaveStashItems(id, Stashes[id].items)
+		end
 	elseif type == "drop" then
 		if Drops[id] then
 			Drops[id].isOpen = false
@@ -1283,7 +1290,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 					Player.Functions.AddItem(itemData.name, 1, toSlot, itemData.info)
 					TriggerClientEvent('qb-drugs:client:updateDealerItems', src, itemData, 1)
 					TriggerClientEvent('QBCore:Notify', src, itemInfo["label"] .. " bought!", "success")
-					TriggerEvent("qb-log:server:CreateLog", "dealers", "Dealer item bought", "green", "**"..GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. " for $"..price)
+					TriggerEvent("qb-log:server:CreateLog", "dealers", "Dealer item bought", "green", "**"..GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. " for £"..price)
 				else
 					TriggerClientEvent('QBCore:Notify', src, "You don\'t have enough cash..", "error")
 				end
@@ -1292,11 +1299,17 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 					Player.Functions.AddItem(itemData.name, fromAmount, toSlot, itemData.info)
 					TriggerClientEvent('qb-drugs:client:updateDealerItems', src, itemData, fromAmount)
 					TriggerClientEvent('QBCore:Notify', src, itemInfo["label"] .. " bought!", "success")
-					TriggerEvent("qb-log:server:CreateLog", "dealers", "Dealer item bought", "green", "**"..GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. "  for $"..price)
+					TriggerEvent("qb-log:server:CreateLog", "dealers", "Dealer item bought", "green", "**"..GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. "  for £"..price)
 				else
 					TriggerClientEvent('QBCore:Notify', src, "You don't have enough cash..", "error")
 				end
 			end
+		elseif itemData.name == 'fishicebox' then
+         	local info = {
+                boxid = math.random(111,999),
+				boxOwner = Player.PlayerData.charinfo.firstname
+            }
+			Player.Functions.AddItem('fishicebox', 1, nil, info, {["quality"] = 100})
 		elseif QBCore.Shared.SplitStr(shopType, "_")[1] == "Itemshop" then
 			if Player.Functions.RemoveMoney("cash", price, "itemshop-bought-item") then
                 if QBCore.Shared.SplitStr(itemData.name, "_")[1] == "weapon" then
@@ -1305,7 +1318,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 				Player.Functions.AddItem(itemData.name, fromAmount, toSlot, itemData.info)
 				TriggerClientEvent('qb-shops:client:UpdateShop', src, QBCore.Shared.SplitStr(shopType, "_")[2], itemData, fromAmount)
 				TriggerClientEvent('QBCore:Notify', src, itemInfo["label"] .. " bought!", "success")
-				TriggerEvent("qb-log:server:CreateLog", "shops", "Shop item bought", "green", "**"..GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. " for $"..price)
+				TriggerEvent("qb-log:server:CreateLog", "shops", "Shop item bought", "green", "**"..GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. " for £"..price)
 			elseif bankBalance >= price then
 				Player.Functions.RemoveMoney("bank", price, "itemshop-bought-item")
                 if QBCore.Shared.SplitStr(itemData.name, "_")[1] == "weapon" then
@@ -1314,7 +1327,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 				Player.Functions.AddItem(itemData.name, fromAmount, toSlot, itemData.info)
 				TriggerClientEvent('qb-shops:client:UpdateShop', src, QBCore.Shared.SplitStr(shopType, "_")[2], itemData, fromAmount)
 				TriggerClientEvent('QBCore:Notify', src, itemInfo["label"] .. " bought!", "success")
-				TriggerEvent("qb-log:server:CreateLog", "shops", "Shop item bought", "green", "**"..GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. " for $"..price)
+				TriggerEvent("qb-log:server:CreateLog", "shops", "Shop item bought", "green", "**"..GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. " for £"..price)
 			else
 				TriggerClientEvent('QBCore:Notify', src, "You don't have enough cash..", "error")
 			end
@@ -1322,12 +1335,12 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 			if Player.Functions.RemoveMoney("cash", price, "unkown-itemshop-bought-item") then
 				Player.Functions.AddItem(itemData.name, fromAmount, toSlot, itemData.info)
 				TriggerClientEvent('QBCore:Notify', src, itemInfo["label"] .. " bought!", "success")
-				TriggerEvent("qb-log:server:CreateLog", "shops", "Shop item bought", "green", "**"..GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. " for $"..price)
+				TriggerEvent("qb-log:server:CreateLog", "shops", "Shop item bought", "green", "**"..GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. " for £"..price)
 			elseif bankBalance >= price then
 				Player.Functions.RemoveMoney("bank", price, "unkown-itemshop-bought-item")
 				Player.Functions.AddItem(itemData.name, fromAmount, toSlot, itemData.info)
 				TriggerClientEvent('QBCore:Notify', src, itemInfo["label"] .. " bought!", "success")
-				TriggerEvent("qb-log:server:CreateLog", "shops", "Shop item bought", "green", "**"..GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. " for $"..price)
+				TriggerEvent("qb-log:server:CreateLog", "shops", "Shop item bought", "green", "**"..GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. " for £"..price)
 			else
 				TriggerClientEvent('QBCore:Notify', src, "You don\'t have enough cash..", "error")
 			end
@@ -1520,6 +1533,33 @@ QBCore.Commands.Add("giveitem", "Give An Item (Admin Only)", {{name="id", help="
 					info.worth = math.random(5000, 10000)
 				elseif itemData["name"] == "labkey" then
 					info.lab = exports["qb-methlab"]:GenerateRandomLab()
+				elseif itemData.name == 'fishicebox' then
+					local info = {
+						boxid = math.random(111,999),
+						boxOwner = Player.PlayerData.charinfo.firstname
+					}
+					Player.Functions.AddItem('fishicebox', 1, nil, info, {["quality"] = 100})
+				elseif itemData.name == 'tendanivel1' then
+					local info = {
+						tendaid = math.random(111,999),
+						tendaOwner = Player.PlayerData.charinfo.firstname.." "..Player.PlayerData.charinfo.lastname,
+					}
+				Player.Functions.AddItem('tendanivel1', 1, nil, info, {["quality"] = 100})
+		
+				elseif itemData.name == 'tendanivel2' then
+					local info = {
+						tendaid = math.random(111,999),
+						tendaOwner = Player.PlayerData.charinfo.firstname.." "..Player.PlayerData.charinfo.lastname,
+					}
+				Player.Functions.AddItem('tendanivel2', 1, nil, info, {["quality"] = 100})
+		
+				elseif itemData.name == 'tendanivel3' then
+					local info = {
+						tendaid = math.random(111,999),
+						tendaOwner = Player.PlayerData.charinfo.firstname.." "..Player.PlayerData.charinfo.lastname,
+					}
+				Player.Functions.AddItem('tendanivel3', 1, nil, info, {["quality"] = 100})
+				
 				elseif itemData["name"] == "printerdocument" then
 					info.url = "https://cdn.discordapp.com/attachments/870094209783308299/870104331142189126/Logo_-_Display_Picture_-_Stylized_-_Red.png"
 				end
@@ -1612,6 +1652,33 @@ QBCore.Functions.CreateUseableItem("id_card", function(source, item)
 						item.info.firstname,
 						item.info.lastname,
 						item.info.birthdate,
+						item.info.gender,
+						item.info.nationality
+					}
+				}
+			)
+		end
+	end
+end)
+
+QBCore.Functions.CreateUseableItem("weaponlicense", function(source, item)
+	local PlayerPed = GetPlayerPed(source)
+	local PlayerCoords = GetEntityCoords(PlayerPed)
+	for k, v in pairs(QBCore.Functions.GetPlayers()) do
+		local TargetPed = GetPlayerPed(v)
+		local dist = #(PlayerCoords - GetEntityCoords(TargetPed))
+		if dist < 3.0 then
+			local gender = "Man"
+			if item.info.gender == 1 then
+				gender = "Woman"
+			end
+			TriggerClientEvent('chat:addMessage', v,  {
+					template = '<div class="chat-message advert"><div class="chat-message-body"><strong>{0}:</strong><br><br> <strong>NI Number:</strong> {1} <br><strong>First Name:</strong> {2} <br><strong>Last Name:</strong> {3} <br><br><strong>Gender:</strong> {4} <br><br><strong colour="red">Approved for Hunting</strong></div></div>',
+					args = {
+						"Hunting License",
+						item.info.citizenid,
+						item.info.firstname,
+						item.info.lastname,
 						gender,
 						item.info.nationality
 					}
