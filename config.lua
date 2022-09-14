@@ -1,5 +1,15 @@
 Config = {}
 
+Config.UseTarget = GetConvar('UseTarget', 'false') == 'true' -- Use qb-target interactions (don't change this, go to your server.cfg and add `setr UseTarget true` to use this and just that from true to false or the other way around)
+
+Config.MaxInventoryWeight = 120000 -- Max weight a player can carry (default 120kg, written in grams)
+Config.MaxInventorySlots = 41 -- Max inventory slots for a player
+
+Config.CleanupDropTime = 15 * 60 -- How many seconds it takes for drops to be untouched before being deleted
+Config.MaxDropViewDistance = 12.5 -- The distance in GTA Units that a drop can be seen
+Config.UseItemDrop = true -- This will enable item object to spawn on drops instead of markers
+Config.ItemDropObject = `sf_prop_sf_backpack_01a` -- if Config.UseItemDrop is true, this will be the prop that spawns for the item
+
 Config.VendingObjects = {
     "prop_vend_soda_01",
     "prop_vend_soda_02",
@@ -14,7 +24,7 @@ Config.CraftingObject = `prop_toolchest_05` -- Only needed if not using target |
 
 Config.VendingItem = {
     [1] = {
-        name = "kurkakola",
+        name = "cocacola",
         price = 4,
         amount = 50,
         info = {},
@@ -32,6 +42,7 @@ Config.VendingItem = {
 }
 
 Config.CraftingItems = {
+--[[ 
     [1] = {
         name = "lockpick",
         amount = 50,
@@ -199,12 +210,13 @@ Config.CraftingItems = {
         slot = 12,
         threshold = 1750,
         points = 12,
-    },
+    }, ]]
 }
 
 Config.AttachmentCraftingLocation = vector3(88.91, 3743.88, 40.77) -- Only needed if not using target
 
 Config.AttachmentCrafting = {
+    --[[ 
     ["items"] = {
         [1] = {
             name = "pistol_extendedclip",
@@ -320,10 +332,8 @@ Config.AttachmentCrafting = {
             threshold = 200,
             points = 8,
         },
-    }
+    } ]]
 }
-
-MaxInventorySlots = 41
 
 BackEngineVehicles = {
     [`ninef`] = true,

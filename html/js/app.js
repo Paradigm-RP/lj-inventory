@@ -474,13 +474,13 @@ function FormatItemInfo(itemData, dom) {
         } else if (itemData.name == "weaponlicense") {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             $(".item-info-description").html(
-                "<p><strong>CSN: </strong><span>" +
-                itemData.info.citizenid +
-                "</span></p><p><strong>First Name: </strong><span>" +
+                "<p><strong>First Name: </strong><span>" +
                 itemData.info.firstname +
                 "</span></p><p><strong>Last Name: </strong><span>" +
                 itemData.info.lastname +
-                "</span></p><p><strong>Approved for Animal Hunting</strong><span>" 
+                "</span></p><p><strong>Birth Date: </strong><span>" +
+                itemData.info.birthdate +
+                "</span></p>"
             );
         } else if (itemData.name == "lawyerpass") {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
@@ -495,28 +495,10 @@ function FormatItemInfo(itemData, dom) {
                 itemData.info.citizenid +
                 "</span></p>"
             );
-		} else if (itemData.name == "fishicebox") {
-			$(".item-info-title").html('<p>' + itemData.label + ' ' + itemData.info.boxid + '</p>')
-			$(".item-info-description").html('<p><strong>Box Owner: </strong><span>' + itemData.info.boxOwner + '</span></p> Ice Box to store all of your fish');
-        } else if (itemData.name == "tendanivel1") {
-            $(".item-info-title").html('<p>' + itemData.label + ' ' + itemData.info.tendaid + '</p>')
-            $(".item-info-description").html('<p><strong>Owner: </strong><span>' + itemData.info.tendaOwner + '</span></p> A small tend...');
-        } else if (itemData.name == "tendanivel2") {
-            $(".item-info-title").html('<p>' + itemData.label + ' ' + itemData.info.tendaid + '</p>')
-            $(".item-info-description").html('<p><strong>Owner: </strong><span>' + itemData.info.tendaOwner + '</span></p> A med tend...');
-        } else if (itemData.name == "tendanivel3") {
-            $(".item-info-title").html('<p>' + itemData.label + ' ' + itemData.info.tendaid + '</p>')
-            $(".item-info-description").html('<p><strong>Owner: </strong><span>' + itemData.info.tendaOwner + '</span></p> A big tend...');
         } else if (itemData.name == "harness") {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             $(".item-info-description").html(
                 "<p>" + itemData.info.uses + " uses left.</p>"
-            );
-        } else if (itemData.name == "mechboard") {
-            $(".item-info-title").html("<p>" + itemData.label + "</p>");
-            $(".item-info-description").html(
-                "<p>" + itemData.info.vehplate + "</p>" +
-                "<p>" + itemData.info.veh + "</p>"
             );
         } else if (itemData.type == "weapon") {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");

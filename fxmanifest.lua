@@ -1,4 +1,3 @@
-
 fx_version 'cerulean'
 game 'gta5'
 
@@ -33,6 +32,5 @@ files {
 	'html/*.ttf'
 }
 
-dependency 'qb-weapons'
 
 lua54 'yes'

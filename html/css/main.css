@@ -14,7 +14,7 @@ p { margin: 0 !important; }
 
 @media screen and (min-width: 2540px) {
     #itembox-label {
-        min-height: 1.0vh;
+        min-height: 1.8vh;
     }
 }
 
@@ -466,7 +466,7 @@ body {
     display: block;
     position: relative;
     margin: 0 auto;
-    margin-top: 1.5vh;
+    margin-top: 2vh;
     width: auto;
     height: auto;
     max-width: 75%;
@@ -619,8 +619,8 @@ body {
 }
 
 .itemboxes-container {
-    height: 150px;
-    min-width: 130px;
+    height: 140px;
+    min-width: 129px;
     max-width: 80vh;
     width: fit-content;
     position: absolute;
@@ -674,7 +674,6 @@ body {
     max-width: 10%;
     max-height: 100%;
     padding: 0.10vw;
-    padding: 0.50vh;
 }
 
 #itembox-label > p {
