@@ -363,7 +363,8 @@ BackEngineVehicles = {
     [`surfer2`] = true,
     [`gp1`] = true,
     [`autarch`] = true,
-    [`tyrant`] = true
+    [`tyrant`] = true,
+    [`tempesta2`] = true
 }
 
 Config.MaximumAmmoValues = {
