@@ -42,8 +42,7 @@ Config.VendingItem = {
 }
 
 Config.CraftingItems = {
---[[ 
-    [1] = {
+--[[     [1] = {
         name = "lockpick",
         amount = 50,
         info = {},
@@ -216,9 +215,8 @@ Config.CraftingItems = {
 Config.AttachmentCraftingLocation = vector3(88.91, 3743.88, 40.77) -- Only needed if not using target
 
 Config.AttachmentCrafting = {
-    --[[ 
     ["items"] = {
-        [1] = {
+--[[         [1] = {
             name = "pistol_extendedclip",
             amount = 50,
             info = {},
@@ -331,8 +329,8 @@ Config.AttachmentCrafting = {
             slot = 8,
             threshold = 200,
             points = 8,
-        },
-    } ]]
+        }, ]]
+    }
 }
 
 BackEngineVehicles = {
@@ -373,8 +371,7 @@ BackEngineVehicles = {
     [`surfer2`] = true,
     [`gp1`] = true,
     [`autarch`] = true,
-    [`tyrant`] = true,
-    [`tempesta2`] = true
+    [`tyrant`] = true
 }
 
 Config.MaximumAmmoValues = {

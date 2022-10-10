@@ -655,8 +655,8 @@ RegisterCommand('inventory', function()
                 local vehicle = QBCore.Functions.GetClosestVehicle()
                 if vehicle ~= 0 and vehicle ~= nil then
                     local pos = GetEntityCoords(ped)
-                    local dimensionMin, dimensionMax = GetModelDimensions(GetEntityModel(vehicle))
-		    local trunkpos = GetOffsetFromEntityInWorldCoords(vehicle, 0.0, (dimensionMin.y), 0.0)
+					          local dimensionMin, dimensionMax = GetModelDimensions(GetEntityModel(vehicle))
+					          local trunkpos = GetOffsetFromEntityInWorldCoords(vehicle, 0.0, (dimensionMin.y), 0.0)
                     if (IsBackEngine(GetEntityModel(vehicle))) then
                         trunkpos = GetOffsetFromEntityInWorldCoords(vehicle, 0.0, (dimensionMax.y), 0.0)
                     end
@@ -679,77 +679,53 @@ RegisterCommand('inventory', function()
 
             if CurrentVehicle then -- Trunk
                 local vehicleClass = GetVehicleClass(curVeh)
-                local maxweight = 0
-                local slots = 0
+                local maxweight
+                local slots
                 if vehicleClass == 0 then
-                    maxweight = 30000
+                    maxweight = 38000
                     slots = 30
                 elseif vehicleClass == 1 then
-                    maxweight = 40000
+                    maxweight = 50000
                     slots = 40
                 elseif vehicleClass == 2 then
-                    maxweight = 65000
+                    maxweight = 75000
                     slots = 50
                 elseif vehicleClass == 3 then
-                    maxweight = 40000
+                    maxweight = 42000
                     slots = 35
                 elseif vehicleClass == 4 then
-                    maxweight = 40000
+                    maxweight = 38000
                     slots = 30
                 elseif vehicleClass == 5 then
-                    maxweight = 35000
+                    maxweight = 30000
                     slots = 25
                 elseif vehicleClass == 6 then
                     maxweight = 30000
                     slots = 25
                 elseif vehicleClass == 7 then
-                    maxweight = 20000
+                    maxweight = 30000
                     slots = 25
                 elseif vehicleClass == 8 then
-                    maxweight = 10000
+                    maxweight = 15000
                     slots = 15
                 elseif vehicleClass == 9 then
-                    maxweight = 45000
+                    maxweight = 60000
                     slots = 35
-                elseif vehicleClass == 10 then
-                    maxweight = 75000
-                    slots = 40
-                elseif vehicleClass == 11 then
-                    maxweight = 100000
-                    slots = 50
                 elseif vehicleClass == 12 then
-                    maxweight = 90000
-                    slots = 45
+                    maxweight = 120000
+                    slots = 35
                 elseif vehicleClass == 13 then
                     maxweight = 0
                     slots = 0
                 elseif vehicleClass == 14 then
-                    maxweight = 40000
+                    maxweight = 120000
                     slots = 50
                 elseif vehicleClass == 15 then
-                    maxweight = 40000
+                    maxweight = 120000
                     slots = 50
                 elseif vehicleClass == 16 then
-                    maxweight = 100000
+                    maxweight = 120000
                     slots = 50
-                elseif vehicleClass == 17 then
-                    maxweight = 45000
-                    slots = 35
-                elseif vehicleClass == 18 then
-                    maxweight = 45000
-                    slots = 35
-                elseif vehicleClass == 19 then
-                    maxweight = 45000
-                    slots = 35
-                elseif vehicleClass == 20 then
-                    maxweight = 90000
-                    slots = 45
-                elseif vehicleClass == 21 then
-                    maxweight = 100000
-                    slots = 50
-                elseif vehicleClass == 22 then
-                    maxweight = 0
-                    slots = 0
                 else
                     maxweight = 60000
                     slots = 35

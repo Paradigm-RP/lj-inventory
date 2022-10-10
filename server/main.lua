@@ -1778,33 +1778,6 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 				end
 			end
 		elseif QBCore.Shared.SplitStr(shopType, "_")[1] == "Itemshop" then
-			if itemData.name == "micard_psa" then
-				local StringCharset = {}
-				local NumberCharset = {}
-				for i = 48,  57 do table.insert(NumberCharset, string.char(i)) end
-				for i = 65,  90 do table.insert(StringCharset, string.char(i)) end
-				for i = 97, 122 do table.insert(StringCharset, string.char(i)) end
-				
-				RandomStr = function(length)
-					if length > 0 then
-						return RandomStr(length-1) .. StringCharset[math.random(1, #StringCharset)]
-					else
-						return ''
-					end
-				end
-				
-				RandomInt = function(length)
-					if length > 0 then
-						return RandomInt(length-1) .. NumberCharset[math.random(1, #NumberCharset)]
-					else
-						return ''
-					end
-				end
-				local psaId = tostring(RandomStr(3) .. RandomInt(2) .. RandomStr(1) .. RandomInt(2) .. RandomInt(3))
-				itemData.info = {
-					serial = psaId
-				}
-			end
 			if Player.Functions.RemoveMoney("cash", price, "itemshop-bought-item") then
                 if QBCore.Shared.SplitStr(itemData.name, "_")[1] == "weapon" then
                     itemData.info.serie = tostring(QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomStr(3) .. QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomStr(2) .. QBCore.Shared.RandomInt(3) .. QBCore.Shared.RandomStr(4))

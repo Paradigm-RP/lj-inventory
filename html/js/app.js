@@ -474,13 +474,13 @@ function FormatItemInfo(itemData, dom) {
         } else if (itemData.name == "weaponlicense") {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             $(".item-info-description").html(
-                "<p><strong>First Name: </strong><span>" +
+                "<p><strong>CSN: </strong><span>" +
+                itemData.info.citizenid +
+                "</span></p><p><strong>First Name: </strong><span>" +
                 itemData.info.firstname +
                 "</span></p><p><strong>Last Name: </strong><span>" +
                 itemData.info.lastname +
-                "</span></p><p><strong>Birth Date: </strong><span>" +
-                itemData.info.birthdate +
-                "</span></p>"
+                "</span></p><p><strong>Approved for Animal Hunting</strong><span>" 
             );
         } else if (itemData.name == "lawyerpass") {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
@@ -499,6 +499,12 @@ function FormatItemInfo(itemData, dom) {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             $(".item-info-description").html(
                 "<p>" + itemData.info.uses + " uses left.</p>"
+            );
+        } else if (itemData.name == "mechboard") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html(
+                "<p>" + itemData.info.vehplate + "</p>" +
+                "<p>" + itemData.info.veh + "</p>"
             );
         } else if (itemData.type == "weapon") {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
